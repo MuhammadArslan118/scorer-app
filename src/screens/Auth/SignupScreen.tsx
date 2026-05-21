@@ -38,6 +38,7 @@ export function SignupScreen({ navigation }: any) {
     setLoading(true);
     try {
       await signup(email, password, name);
+      navigation.replace('MainTabs');
     } catch (error: any) {
       Alert.alert('Signup Failed', error.message || 'Please try again');
     } finally {

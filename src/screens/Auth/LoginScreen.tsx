@@ -36,6 +36,7 @@ export function LoginScreen({ navigation }: any) {
     setLoading(true);
     try {
       await login(email, password);
+      navigation.replace('MainTabs');
     } catch (error: any) {
       Alert.alert('Login Failed', error.message || 'Please try again');
     } finally {

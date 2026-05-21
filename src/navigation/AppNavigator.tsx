@@ -103,6 +103,7 @@ export function AppNavigator() {
 
   return (
     <Stack.Navigator
+      initialRouteName="MainTabs"
       screenOptions={{
         headerStyle: { backgroundColor: colors.surface },
         headerTintColor: colors.text,

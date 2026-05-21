@@ -36,9 +36,40 @@ export function ProfileScreen({ navigation }: any) {
   const handleLogout = () => {
     Alert.alert('Logout', 'Are you sure you want to logout?', [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'Logout', style: 'destructive', onPress: logout },
+      {
+        text: 'Logout',
+        style: 'destructive',
+        onPress: async () => {
+          await logout();
+          navigation.navigate('Home');
+        },
+      },
     ]);
   };
+
+  if (!user) {
+    return (
+      <View style={[styles.container, styles.centered, { backgroundColor: colors.background }]}>
+        <Text style={[styles.appName, { color: colors.primary }]}>CricketScorer</Text>
+        <Text style={[styles.tagline, { color: colors.textSecondary }]}>
+          Sign in to track your stats
+        </Text>
+        <Button
+          title="Sign In"
+          onPress={() => navigation.navigate('Login')}
+          size="large"
+          style={{ width: '80%', marginTop: 24 }}
+        />
+        <Button
+          title="Create Account"
+          onPress={() => navigation.navigate('Signup')}
+          variant="outline"
+          size="large"
+          style={{ width: '80%', marginTop: 12 }}
+        />
+      </View>
+    );
+  }
 
   const stats = [
     { label: 'Matches', value: '47' },
@@ -164,6 +195,9 @@ export function ProfileScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   content: { padding: 16 },
+  centered: { justifyContent: 'center', alignItems: 'center', padding: 24 },
+  appName: { fontSize: 32, fontWeight: '900', letterSpacing: -1 },
+  tagline: { fontSize: 16, marginTop: 8, textAlign: 'center' },
   profileHeader: {
     alignItems: 'center',
     padding: 24,
